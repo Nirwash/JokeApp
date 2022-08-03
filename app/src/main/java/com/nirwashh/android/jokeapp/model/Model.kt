@@ -1,16 +1,19 @@
 package com.nirwashh.android.jokeapp.model
 
-interface Model<S, E> {
+import com.nirwashh.android.jokeapp.domain.Joke
+import com.nirwashh.android.jokeapp.domain.JokeFailure
+
+interface Model {
 
     fun getJoke()
 
-    fun init(callback: ResultCallback<S, E>)
+    fun init(callback: ResultCallback)
 
     fun clear()
 }
 
-interface ResultCallback<S, E> {
-    fun provideSuccess(data: S)
+interface ResultCallback {
+    fun provideSuccess(data: Joke)
 
-    fun provideError(error: E)
+    fun provideError(error: JokeFailure)
 }
