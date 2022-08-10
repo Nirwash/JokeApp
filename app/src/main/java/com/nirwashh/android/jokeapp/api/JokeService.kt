@@ -7,7 +7,7 @@ import retrofit2.http.GET
 interface JokeService {
 
 
-    @GET("https://type.fit/api/quotes")
+    @GET("https://catfact.ninja/fact")
     fun getJoke() : Call<JokeDTO>
 
 }

@@ -19,7 +19,7 @@ class TestModel(resourceManager: ResourceManager) : Model {
         Thread {
             Thread.sleep(1000)
             when (count) {
-                0 -> callback?.provideSuccess(Joke("testText", "testPunchline"))
+                0 -> callback?.provideSuccess(Joke("testText"))
                 1 -> callback?.provideError(noConnection)
                 2 -> callback?.provideError(serviceUnavailable)
             }
