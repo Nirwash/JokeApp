@@ -6,7 +6,7 @@ import android.view.View
 import com.nirwashh.android.jokeapp.viewmodel.*
 import com.nirwashh.android.jokeapp.databinding.ActivityMainBinding
 import com.nirwashh.android.jokeapp.utils.JokeApp
-import com.nirwashh.android.jokeapp.viewmodel.TextCallback
+import com.nirwashh.android.jokeapp.viewmodel.DataCallback
 
 class MainActivity : AppCompatActivity() {
     private lateinit var b: ActivityMainBinding
@@ -24,10 +24,16 @@ class MainActivity : AppCompatActivity() {
                 progressbar.visibility = View.VISIBLE
                 viewModel.getJoke()
             }
+            checkbox.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.changeJokeStatus(isChecked)
+            }
+            changeButton.setOnClickListener {
+                viewModel.changeJokeStatus()
+            }
         }
 
 
-        viewModel.init(object : TextCallback {
+        viewModel.init(object : DataCallback {
             override fun provideText(text: String) = runOnUiThread {
                 b.apply {
                     btnGetJoke.isEnabled = true
@@ -35,6 +41,10 @@ class MainActivity : AppCompatActivity() {
                     tvJoke.text = text
                 }
 
+            }
+
+            override fun provideIconRes(id: Int) = runOnUiThread {
+                b.changeButton.setImageResource(id)
             }
         })
     }

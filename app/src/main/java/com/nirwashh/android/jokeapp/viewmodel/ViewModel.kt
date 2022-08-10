@@ -1,33 +1,45 @@
 package com.nirwashh.android.jokeapp.viewmodel
 
+import androidx.annotation.DrawableRes
 import com.nirwashh.android.jokeapp.domain.Joke
-import com.nirwashh.android.jokeapp.domain.JokeFailure
 import com.nirwashh.android.jokeapp.model.Model
-import com.nirwashh.android.jokeapp.model.ResultCallback
+import com.nirwashh.android.jokeapp.model.JokeCallback
 
 class ViewModel(private val model: Model) {
-    private var callback: TextCallback? = null
+    private var dataCallback: DataCallback? = null
+    private val jokeCallback = object : JokeCallback {
+        override fun provide(joke: Joke) {
+            dataCallback?.let {
+                joke.map(it)
+            }
+        }
+    }
 
-    fun init(callback: TextCallback) {
-        this.callback = callback
-        model.init(object : ResultCallback {
-            override fun provideSuccess(data: Joke) = callback.provideText(data.getJokeUi())
-
-
-            override fun provideError(error:JokeFailure) = callback.provideText(error.getMessage())
-        })
+    fun init(callback: DataCallback) {
+        dataCallback = callback
+        model.init(jokeCallback)
     }
 
     fun getJoke() {
         model.getJoke()
     }
 
+    fun changeJokeStatus() {
+        model.changeJokeStatus(jokeCallback)
+    }
+
+    fun chooseFavorites(favorites: Boolean) {
+        model.chooseDataSource(favorites)
+    }
+
     fun clear() {
-        callback = null
+        dataCallback = null
         model.clear()
     }
 }
 
-interface TextCallback {
+interface DataCallback {
     fun provideText(text: String)
+
+    fun provideIconRes(@DrawableRes id: Int)
 }

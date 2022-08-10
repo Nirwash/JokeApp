@@ -1,15 +1,12 @@
 package com.nirwashh.android.jokeapp.utils
 
-import com.nirwashh.android.jokeapp.domain.Joke
-import com.nirwashh.android.jokeapp.domain.NoConnection
-import com.nirwashh.android.jokeapp.domain.ResourceManager
-import com.nirwashh.android.jokeapp.domain.ServiceUnavailable
+import com.nirwashh.android.jokeapp.domain.*
 import com.nirwashh.android.jokeapp.model.Model
-import com.nirwashh.android.jokeapp.model.ResultCallback
+import com.nirwashh.android.jokeapp.model.JokeCallback
 
 class TestModel(resourceManager: ResourceManager) : Model {
 
-    private var callback: ResultCallback? = null
+    private var callback: JokeCallback? = null
     private var count = 0
     private val noConnection = NoConnection(resourceManager)
     private val serviceUnavailable = ServiceUnavailable(resourceManager)
@@ -19,9 +16,9 @@ class TestModel(resourceManager: ResourceManager) : Model {
         Thread {
             Thread.sleep(1000)
             when (count) {
-                0 -> callback?.provideSuccess(Joke("testText"))
-                1 -> callback?.provideError(noConnection)
-                2 -> callback?.provideError(serviceUnavailable)
+                0 -> callback?.provide(BaseJoke("test text"))
+                1 -> callback?.provide(FavoriteJoke("favorite text"))
+                2 -> callback?.provide(FailedJoke(serviceUnavailable.getMessage()))
             }
             count++
             if (count == 3) count = 0
@@ -29,8 +26,12 @@ class TestModel(resourceManager: ResourceManager) : Model {
 
     }
 
-    override fun init(callback: ResultCallback) {
-        this.callback = callback
+    override fun init(jokeCallback: JokeCallback) {
+        this.callback = jokeCallback
+    }
+
+    override fun changeJokeStatus(jokeCallback: JokeCallback) {
+        TODO()
     }
 
     override fun clear() {
