@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import com.nirwashh.android.jokeapp.R
 import com.nirwashh.android.jokeapp.api.JokeCloudCallback
 import com.nirwashh.android.jokeapp.api.JokeService
+import com.nirwashh.android.jokeapp.model.JokeCachedCallback
 import com.nirwashh.android.jokeapp.model.JokeServerModel
 import com.nirwashh.android.jokeapp.viewmodel.DataCallback
 
@@ -34,6 +35,7 @@ abstract class Joke(private val text: String) {
 }
 
 interface CacheDataSource {
+    fun getJoke(jokeCachedCallback: JokeCachedCallback)
     fun addOrRemove(id: Int, joke: JokeServerModel): Joke
 }
 

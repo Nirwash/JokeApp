@@ -5,7 +5,10 @@ import com.nirwashh.android.jokeapp.domain.CloudDataSource
 import com.nirwashh.android.jokeapp.model.JokeServerModel
 
 class TestCloudDataSource : CloudDataSource {
+    private var count = 0
     override fun getJoke(callback: JokeCloudCallback) {
-        callback.provide(JokeServerModel("test Text", 0))
+        val joke = JokeServerModel("test $count", count)
+        callback.provide(joke)
+        count++
     }
 }

@@ -1,6 +1,10 @@
 package com.nirwashh.android.jokeapp.model
 
+import com.nirwashh.android.jokeapp.R
+import com.nirwashh.android.jokeapp.domain.BaseResourceManager
 import com.nirwashh.android.jokeapp.domain.Joke
+import com.nirwashh.android.jokeapp.domain.JokeFailure
+import com.nirwashh.android.jokeapp.domain.ResourceManager
 
 interface Model {
 
@@ -24,3 +28,6 @@ interface JokeCachedCallback {
 
     fun fail()
 }
+
+
+

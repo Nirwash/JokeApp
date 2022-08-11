@@ -34,7 +34,12 @@ class TestModel(resourceManager: ResourceManager) : Model {
         TODO()
     }
 
+    override fun chooseDataSource(cached: Boolean) {
+        TODO("Not yet implemented")
+    }
+
     override fun clear() {
         callback = null
     }
+
 }

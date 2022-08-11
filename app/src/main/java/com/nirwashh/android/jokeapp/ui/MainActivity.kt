@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.getJoke()
             }
             checkbox.setOnCheckedChangeListener { _, isChecked ->
-                viewModel.changeJokeStatus(isChecked)
+                viewModel.chooseFavorites(isChecked)
             }
             changeButton.setOnClickListener {
                 viewModel.changeJokeStatus()
