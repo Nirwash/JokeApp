@@ -1,15 +1,11 @@
-package com.nirwashh.android.jokeapp.utils
+package com.nirwashh.android.jokeapp
 
 import android.app.Application
-import com.google.gson.Gson
-import com.nirwashh.android.jokeapp.api.JokeService
 import com.nirwashh.android.jokeapp.domain.BaseResourceManager
-import com.nirwashh.android.jokeapp.model.BaseCloudDataSource
-import com.nirwashh.android.jokeapp.model.BaseModel
 import com.nirwashh.android.jokeapp.viewmodel.ViewModel
+import io.realm.Realm
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 class JokeApp: Application() {
 
@@ -17,13 +13,17 @@ class JokeApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Realm.init(this)
         val retrofit = Retrofit.Builder()
             .baseUrl("https://www.google.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        viewModel = ViewModel(BaseModel(TestCacheDataSource(),
+        viewModel = ViewModel(
+            BaseModel(
+                BaseCacheDataSource(Realm.getDefaultInstance()),
             BaseCloudDataSource(retrofit.create(JokeService::class.java)),
-            BaseResourceManager(this)))
+            BaseResourceManager(this))
+        )
     }
 }

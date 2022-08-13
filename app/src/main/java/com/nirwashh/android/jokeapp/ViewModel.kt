@@ -1,16 +1,16 @@
 package com.nirwashh.android.jokeapp.viewmodel
 
 import androidx.annotation.DrawableRes
-import com.nirwashh.android.jokeapp.domain.Joke
-import com.nirwashh.android.jokeapp.model.Model
-import com.nirwashh.android.jokeapp.model.JokeCallback
+import com.nirwashh.android.jokeapp.JokeUIModel
+import com.nirwashh.android.jokeapp.Model
+import com.nirwashh.android.jokeapp.JokeCallback
 
 class ViewModel(private val model: Model) {
     private var dataCallback: DataCallback? = null
     private val jokeCallback = object : JokeCallback {
-        override fun provide(joke: Joke) {
+        override fun provide(jokeUIModel: JokeUIModel) {
             dataCallback?.let {
-                joke.map(it)
+                jokeUIModel.map(it)
             }
         }
     }

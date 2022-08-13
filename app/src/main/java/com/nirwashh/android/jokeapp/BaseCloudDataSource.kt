@@ -1,9 +1,6 @@
-package com.nirwashh.android.jokeapp.model
+package com.nirwashh.android.jokeapp
 
-import com.nirwashh.android.jokeapp.api.ErrorType
-import com.nirwashh.android.jokeapp.api.JokeCloudCallback
-import com.nirwashh.android.jokeapp.api.JokeService
-import com.nirwashh.android.jokeapp.domain.CloudDataSource
+
 import retrofit2.Call
 import retrofit2.Response
 import java.net.UnknownHostException
@@ -16,7 +13,7 @@ class BaseCloudDataSource(private val service: JokeService) : CloudDataSource {
                 response: Response<JokeServerModel>
             ) {
                 if (response.isSuccessful) {
-                    callback.provide(response.body()!!)
+                    callback.provide(response.body()!!.toJoke())
                 } else {
                     callback.fail(ErrorType.SERVICE_UNAVAILABLE)
                 }

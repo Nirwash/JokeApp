@@ -1,6 +1,5 @@
-package com.nirwashh.android.jokeapp.api
+package com.nirwashh.android.jokeapp
 
-import com.nirwashh.android.jokeapp.model.JokeServerModel
 import retrofit2.Call
 import retrofit2.http.GET
 
@@ -21,7 +20,7 @@ interface ServiceCallBack {
 }
 
 interface JokeCloudCallback {
-    fun provide(joke: JokeServerModel)
+    fun provide(joke: Joke)
     fun fail(error: ErrorType)
 }
 

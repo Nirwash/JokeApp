@@ -1,8 +1,6 @@
-package com.nirwashh.android.jokeapp.utils
+package com.nirwashh.android.jokeapp
 
 import com.nirwashh.android.jokeapp.domain.*
-import com.nirwashh.android.jokeapp.model.Model
-import com.nirwashh.android.jokeapp.model.JokeCallback
 
 class TestModel(resourceManager: ResourceManager) : Model {
 
@@ -16,9 +14,9 @@ class TestModel(resourceManager: ResourceManager) : Model {
         Thread {
             Thread.sleep(1000)
             when (count) {
-                0 -> callback?.provide(BaseJoke("test text"))
-                1 -> callback?.provide(FavoriteJoke("favorite text"))
-                2 -> callback?.provide(FailedJoke(serviceUnavailable.getMessage()))
+                0 -> callback?.provide(BaseJokeUIModel("test text"))
+                1 -> callback?.provide(FavoriteJokeUIModel("favorite text"))
+                2 -> callback?.provide(FailedJokeUIModel(serviceUnavailable.getMessage()))
             }
             count++
             if (count == 3) count = 0
@@ -41,5 +39,4 @@ class TestModel(resourceManager: ResourceManager) : Model {
     override fun clear() {
         callback = null
     }
-
 }

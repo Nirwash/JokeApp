@@ -1,11 +1,10 @@
-package com.nirwashh.android.jokeapp.ui
+package com.nirwashh.android.jokeapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.nirwashh.android.jokeapp.viewmodel.*
 import com.nirwashh.android.jokeapp.databinding.ActivityMainBinding
-import com.nirwashh.android.jokeapp.utils.JokeApp
 import com.nirwashh.android.jokeapp.viewmodel.DataCallback
 
 class MainActivity : AppCompatActivity() {
